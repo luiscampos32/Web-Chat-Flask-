@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Chat!{% endblock %}
+{% block cssPath %}/static/index.css{% endblock %}
+{% block content %}
+
+    <div class="title"><h1>Welcome to the Chatroom!</h1></div>
+<div id="topicForm pure-g">
+<form class="pure-form pure-u-1" action="/new-chat" method="POST">
+    <label>Topic: <input type="text" name="topic"></label>
+    <button type="submit" class="pure-button pure-button-primary">Start Chat</button>
+  </form>
+</div>
+
+{% endblock %}
