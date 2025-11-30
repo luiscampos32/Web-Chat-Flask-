@@ -10,6 +10,18 @@ from flask_socketio import send, emit, join_room
 
 rooms = {}
 
+# Sets up a CSRF token before each request if not already present
+@app.before_request
+def setup_csrf():
+    if 'csrf_token' not in flask.session:
+        flask.session['csrf_token'] = base64.b64encode(os.urandom(32)).decode('ascii')
+
+# Sets up the user in the global context before each request if logged in
+@app.before_request
+def setup_user():
+    if 'user' in flask.session:
+        flask.g.user = flask.session['user']
+
 # Defines a simple route for the index page
 @app.route('/')
 def index():
@@ -35,4 +47,5 @@ def handle_room(key):
     if key not in rooms:
         flask.abort(404)
     room = rooms[key]
-    return flask.render_template('chatroom.html', room=room)
+    # Renders the chatroom template with the room details and CSRF token
+    return flask.render_template('chatroom.html', room=room, csrf_token=flask.session['csrf_token'])
