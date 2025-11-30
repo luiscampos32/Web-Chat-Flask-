@@ -1,0 +1,2 @@
+SECRET_KEY = 'ioQQ3dWzHesuGQeQBDXsyt4kbptDCUZE'
+ADMIN_PASSWORD = 'root'
