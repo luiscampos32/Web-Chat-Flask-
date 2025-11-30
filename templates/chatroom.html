@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Chat!{% endblock %}
+{% block cssPath %}/static/chatroom.css{% endblock %}
+{% block content %}
+
+<main class="chatwindow unjoined" data-key="{{ key }}" data-sid="{{ csrf_token }}" data-nick="">
+
+        <h1 class="topic">{{ room.topic }}</h1>
+        <hr>
+        <div id="joinForm" class="join">
+          <form class="join-form">
+            <label for="join-nick">Nickname:</label>
+            <input type="text" name="nick" id="join-nick">
+            <button type="submit" class="pure-button pure-button-primary">Join!</button>
+          </form>
+        </div>
+
+    <div id="onlineList" class="roster">
+        <h3>Online Users</h3>
+        <ul id="roster" class="roster-list">
+
+        </ul>
+      </div>
+
+      <div id="chatArea" class="chat">
+        <ul id="messages" class="chat-messages">
+        </ul>
+        <form class="chat-input" action="">
+          <label for="in-msg">Chat:</label>
+          <input type="text" name="message" id="in-msg">
+          <button type="submit" class="pure-button pure-button-primary">send</button>
+        </form>
+      </div>
+
+
+</main>
+  <script src="{{ url_for('static', filename='chat.js') }}"></script>
+{% endblock %}
